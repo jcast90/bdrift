@@ -1,0 +1,323 @@
+{
+  "name": "Bdrift",
+  "tagline": "Accelerate recruiting, empower business growth.",
+  "description": "An AI-driven platform for small to mid-size hospitality staffing firms to automate candidate sourcing, outreach campaigns, response qualification, and pipeline analytics.",
+  "domain": "bdrift.com",
+  "flags": {
+    "waitlistMode": false,
+    "mvpReady": true
+  },
+  "brand": {
+    "primary": "#8b5cf6",
+    "primaryDark": "#7c3aed",
+    "accent": "#ec4899",
+    "gradient": "from-violet-500 to-pink-500",
+    "gradientHover": "from-violet-400 to-pink-400",
+    "surface": "#0A0A0F",
+    "surfaceLight": "#111118"
+  },
+  "landing": {
+    "headline": "Automate Your Hospitality Recruiting Outreach",
+    "subheadline": "Source candidates, launch personalized campaigns, and book calls\u2014all without increasing headcount.",
+    "painStats": [
+      {
+        "stat": "60%",
+        "label": "time wasted on manual candidate sourcing"
+      },
+      {
+        "stat": "50%",
+        "label": "lower response rates from generic outreach"
+      },
+      {
+        "stat": "30%",
+        "label": "growth lost due to slow follow-ups"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Connect Your Accounts",
+        "desc": "Link LinkedIn, Indeed, ZipRecruiter, or add company URLs to start sourcing."
+      },
+      {
+        "title": "Launch Personalized Campaigns",
+        "desc": "Use AI-generated templates to engage candidates and clients with multi-touch sequences."
+      },
+      {
+        "title": "Automate Response Handling",
+        "desc": "Qualify replies and book calls automatically to save time."
+      }
+    ],
+    "painPoints": [
+      "Manual sourcing is slow and inconsistent",
+      "Outreach requires too much manual effort",
+      "Scheduling calls wastes valuable recruiter time"
+    ],
+    "pricing": [
+      {
+        "plan": "Solo",
+        "price": "$29",
+        "period": "/mo",
+        "desc": "1 user seat, up to 100 contacts, basic sourcing & outreach, email support",
+        "features": [
+          "1 user seat",
+          "Up to 100 contacts",
+          "Basic sourcing & outreach",
+          "Email support"
+        ],
+        "highlighted": false
+      },
+      {
+        "plan": "Team",
+        "price": "$59",
+        "period": "/mo",
+        "desc": "Up to 5 user seats, 500 contacts, advanced automation & analytics, priority support",
+        "features": [
+          "Up to 5 user seats",
+          "500 contacts",
+          "Advanced automation & analytics",
+          "Priority support"
+        ],
+        "highlighted": true
+      }
+    ],
+    "finalCta": {
+      "headline": "Ready to grow your recruiting business?",
+      "subheadline": "Start your free trial today and automate your sourcing and outreach."
+    }
+  },
+  "dashboard": {
+    "navItems": [
+      {
+        "label": "Sourcing",
+        "href": "/dashboard/sourcing",
+        "icon": "Search"
+      },
+      {
+        "label": "Campaigns",
+        "href": "/dashboard/campaigns",
+        "icon": "Mail"
+      },
+      {
+        "label": "Responses",
+        "href": "/dashboard/responses",
+        "icon": "ChatBubbleLeftRight"
+      },
+      {
+        "label": "Analytics",
+        "href": "/dashboard/analytics",
+        "icon": "ChartBarSquare"
+      },
+      {
+        "label": "Settings",
+        "href": "/dashboard/settings",
+        "icon": "Settings"
+      }
+    ],
+    "features": [
+      {
+        "name": "Sourcing",
+        "slug": "sourcing",
+        "description": "Manage sourced candidate and client contacts with hospitality filters.",
+        "table": "PREFIX_contacts",
+        "fields": [
+          {
+            "name": "contact_name",
+            "type": "text",
+            "label": "Contact Name",
+            "required": true
+          },
+          {
+            "name": "source_platform",
+            "type": "enum",
+            "label": "Source Platform",
+            "required": true
+          },
+          {
+            "name": "role_position",
+            "type": "text",
+            "label": "Role/Position",
+            "required": false
+          },
+          {
+            "name": "contact_email",
+            "type": "text",
+            "label": "Contact Email",
+            "required": false
+          },
+          {
+            "name": "status",
+            "type": "enum",
+            "label": "Status",
+            "required": true
+          }
+        ],
+        "crud": {
+          "create": true,
+          "read": true,
+          "update": true,
+          "delete": true
+        },
+        "stats": [
+          {
+            "label": "Total Contacts",
+            "field": "count"
+          }
+        ],
+        "defaultSort": "created_at",
+        "searchable": [
+          "contact_name",
+          "contact_email"
+        ]
+      },
+      {
+        "name": "Campaigns",
+        "slug": "campaigns",
+        "description": "Create and manage multi-touch outreach campaigns with AI personalization.",
+        "table": "PREFIX_campaigns",
+        "fields": [
+          {
+            "name": "campaign_name",
+            "type": "text",
+            "label": "Campaign Name",
+            "required": true
+          },
+          {
+            "name": "sequence_steps",
+            "type": "list",
+            "label": "Sequence Steps",
+            "required": true
+          },
+          {
+            "name": "target_contact_list",
+            "type": "relation",
+            "label": "Target Contact List",
+            "required": true
+          },
+          {
+            "name": "status",
+            "type": "enum",
+            "label": "Status",
+            "required": true
+          }
+        ],
+        "crud": {
+          "create": true,
+          "read": true,
+          "update": true,
+          "delete": true
+        },
+        "stats": [
+          {
+            "label": "Open Rate %",
+            "field": "open_rate"
+          },
+          {
+            "label": "Reply Rate %",
+            "field": "reply_rate"
+          }
+        ],
+        "defaultSort": "created_at",
+        "searchable": [
+          "campaign_name"
+        ]
+      },
+      {
+        "name": "Responses",
+        "slug": "responses",
+        "description": "View and manage inbound replies with AI qualification and call booking.",
+        "table": "PREFIX_inbound_replies",
+        "fields": [
+          {
+            "name": "contact_name",
+            "type": "text",
+            "label": "Contact Name",
+            "required": true
+          },
+          {
+            "name": "reply_snippet",
+            "type": "text",
+            "label": "Reply Snippet",
+            "required": true
+          },
+          {
+            "name": "qualification_status",
+            "type": "enum",
+            "label": "Qualification Status",
+            "required": true
+          },
+          {
+            "name": "scheduled_call",
+            "type": "datetime",
+            "label": "Scheduled Call Date/Time",
+            "required": false
+          }
+        ],
+        "crud": {
+          "create": false,
+          "read": true,
+          "update": true,
+          "delete": false
+        },
+        "stats": [
+          {
+            "label": "Qualified Replies",
+            "field": "count"
+          },
+          {
+            "label": "Calls Booked",
+            "field": "count"
+          }
+        ],
+        "defaultSort": "created_at",
+        "searchable": [
+          "contact_name",
+          "reply_snippet"
+        ]
+      },
+      {
+        "name": "Analytics",
+        "slug": "analytics",
+        "description": "Visualize outreach pipeline stages and campaign performance metrics.",
+        "table": "PREFIX_contacts",
+        "fields": [
+          {
+            "name": "pipeline_stage_counts",
+            "type": "numeric",
+            "label": "Pipeline Stage Counts",
+            "required": true
+          },
+          {
+            "name": "campaign_performance_metrics",
+            "type": "numeric",
+            "label": "Campaign Performance Metrics",
+            "required": true
+          },
+          {
+            "name": "time_filters",
+            "type": "date",
+            "label": "Time Filters",
+            "required": true
+          }
+        ],
+        "crud": {
+          "create": false,
+          "read": true,
+          "update": false,
+          "delete": false
+        },
+        "stats": [
+          {
+            "label": "Overall Response Rate %",
+            "field": "response_rate"
+          },
+          {
+            "label": "Conversion to Calls %",
+            "field": "conversion_rate"
+          }
+        ],
+        "defaultSort": "created_at",
+        "searchable": []
+      }
+    ]
+  }
+}
